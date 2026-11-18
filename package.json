@@ -1,0 +1,53 @@
+{
+  "name": "gemini-decisions-bridge",
+  "version": "1.0.0",
+  "description": "Local Google Gemini Decisions API (gemini-decision-1) bridge with OAuth auto-refresh and SystemOne/Jev translation for OpenChamber and OpenCode",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "bunx openchamber-guest-bundle panel/main.ts panel/main.js && bunx openchamber-guest-bundle --node service/main.ts service/main.js",
+    "check": "bunx openchamber-guest-check",
+    "typecheck": "bun x tsc --noEmit",
+    "test": "bun test"
+  },
+  "openchamber": {
+    "apiVersion": 1,
+    "engines": {
+      "openchamber": ">=2.7.0"
+    },
+    "id": "gemini-decisions-bridge",
+    "name": "Gemini Decisions Bridge",
+    "icon": "icon.svg",
+    "contributes": {
+      "panel": {
+        "id": "gemini-decisions",
+        "name": "Gemini Decisions",
+        "icon": "icon.svg",
+        "entry": "panel/index.html"
+      },
+      "service": {
+        "entry": "service/main.js",
+        "runtime": "host",
+        "keepRunning": true
+      },
+      "statusSection": {
+        "source": {
+          "path": "/status",
+          "interval": 5000
+        },
+        "title": "Gemini Decisions"
+      }
+    }
+  },
+  "dependencies": {
+    "@openchamber/sdk": "2.7.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.4",
+    "@types/node": "^26.6.6"
+  },
+  "peerDependencies": {
+    "typescript": "^7"
+  }
+}
